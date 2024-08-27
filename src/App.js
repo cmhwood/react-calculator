@@ -1,29 +1,29 @@
 import { useReducer } from 'react';
 import './styles.css';
+import DigitButton from './DigitButton';
 
-const ACTIONS = {
-    ADD_DIGIT: 'add-digit',
-    CHOOSE_OPERATION: 'choose-operation',
-    CLEAR: 'clear', 
-    DELTE_DIGIT: 'delete-digit',
-    EVALUATE: 'evaluate'
-}
+export const ACTIONS = {
+  ADD_DIGIT: 'add-digit',
+  CHOOSE_OPERATION: 'choose-operation',
+  CLEAR: 'clear',
+  DELTE_DIGIT: 'delete-digit',
+  EVALUATE: 'evaluate',
+};
 
 function reducer(state, { type, payload }) {
-switch(type) {
+  switch (type) {
     case ACTIONS.ADD_DIGIT:
-        return {
-            ...state, 
-            currentOperand: `${currentOperand || ""}${payload.digit}`
-        }
-}
+      return {
+        ...state,
+        currentOperand: `${state.currentOperand || ''}${payload.digit}`,
+      };
+  }
 }
 
 function App() {
-  const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(reducer, 
-    {});
+  const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(reducer, {});
 
-    dispatch({ type: ACTIONS.ADD_DIGIT, payload: { digit: 1}})
+  // dispatch({ type: ACTIONS.ADD_DIGIT, payload: { digit: 1}})
   return (
     <div className='calculator-grid'>
       <div className='output'>
@@ -34,12 +34,13 @@ function App() {
       </div>
       <button className='span-two'>AC</button>
       <button>DEL</button>
-      <button>÷</button>
+      <DigitButton digit='÷' dispatch={dispatch} />
+      {/* <button>÷</button> */}
       <button>1</button>
       <button>2</button>
       <button>3</button>
       <button>*</button>
-      <button>4</button> 
+      <button>4</button>
       <button>5</button>
       <button>6</button>
       <button>+</button>
